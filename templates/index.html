@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Py Quiz</title>
+{% endblock %}
+
+{% block content %}
+    <div id="question_container" class="container border border-success rounded
+            col-lg-7 col-md-10 col-sm-12 p-5">
+
+    </div>
+    <br>
+    <div style="width: 100%; text-align: center;">
+        <input class="btn btn-success" type="submit">
+    </div>
+    <script>
+        var container = document.getElementById('question_container')
+        for(i = 1; i <= 10; i++){
+            each_qus = document.createElement('div')
+            each_qus.setAttribute('class', 'm-1 each_qus')
+            qus_txt = document.createElement('h5')
+            qus_txt.innerHTML = `${i}. Question?`
+            each_qus.appendChild(qus_txt)
+            answer_input = document.createElement('div')
+            answer_input.setAttribute('class', 'answer_input row d-flex justify-content-between')
+            for(j = 0; j < 10; j++){
+                inp = document.createElement('input')
+                inp.setAttribute('type', 'number')
+                answer_input.appendChild(inp)
+                }
+            each_qus.appendChild(answer_input)
+            container.appendChild(each_qus)
+            }
+    </script>
+{% endblock %}
