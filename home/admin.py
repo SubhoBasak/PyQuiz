@@ -3,7 +3,7 @@ from .models import Score
 
 
 class ScoreAdmin(admin.ModelAdmin):
-    list_display = ['full_name', 'score', 'date_time']
+    list_display = ['full_name', 'score', 'start_date_time', 'end_date_time']
 
     def has_add_permission(self, request, obj=None):
         return False

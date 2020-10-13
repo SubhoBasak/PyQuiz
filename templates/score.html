@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+	<title>Score</title>
+{% endblock %}
+
+{% block content %}
+	<style type="text/css">
+		table p {
+			color: green;
+		}
+
+		table span {
+			color: dodgerblue;
+	</style>
+	<div style="width: 80%; margin: auto; display: block; background: #90ee90cc;">
+		<h1>Quiz Result</h1>
+		<h2>-----------------------</h2>
+	</div>
+	<table style="background: #ffb6c1cc; width: 80%; margin: auto; display: block; font-size: 1.7rem; padding: 20px;">
+		<tr>
+			<td><p><span>Name :</span> {{user.first_name}} {{user.last_name}}</p></td>
+		</tr>
+		<tr>
+			<td><p><span>Total Questions :</span> 10</p></td>
+		</tr>
+		<tr>
+			<td><p><span>Correct answers :</span> {{correct}}</p></td>
+		</tr>
+		<tr>
+			<td><p><span>Wrong Answers :</span> {{incorrect}}</p></td>
+		</tr>
+		<tr>
+			<td><p><span>Total Score :</span> {{correct}}/10</p></td>
+		</tr>
+	</table>
+{% endblock %}

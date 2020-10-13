@@ -8,40 +8,113 @@
 {% block content %}
     <div id="question_container" class="container border border-success rounded
             col-lg-7 col-md-10 col-sm-12 p-5">
-        <div class="m-1 each_qus">
-            <h5>1. {{q.q1w1}}, {{q.q1w2}}, {{q.q1w3}}, {{q.q1w4}}, {{q.q1w5}}</h5>
-            <div class="row d-flex justify-content-between">
-                <input type="text" name="a1w1" maxlength="3" required>
-                <input type="text" name="a1w1" maxlength="3" required>
-                <input type="text" name="a1w1" maxlength="3" required>
-                <input type="text" name="a1w1" maxlength="3" required>
-                <input type="text" name="a1w1" maxlength="3" required>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="m-1 each_qus">
+                <h5>1. {{q.q1w1}}, {{q.q1w2}}, {{q.q1w3}}, {{q.q1w4}}, {{q.q1w5}}</h5>
+                <div class="row d-flex justify-content-between answer_input">
+                    <input type="text" name="a1w1" maxlength="3" required>
+                    <input type="text" name="a1w2" maxlength="3" required>
+                    <input type="text" name="a1w3" maxlength="3" required>
+                    <input type="text" name="a1w4" maxlength="3" required>
+                    <input type="text" name="a1w5" maxlength="3" required>
+                </div>
             </div>
-        </div>
-        <input class="btn btn-success" type="submit">
+            <div class="m-1 each_qus">
+                <h5>2. {{q.q2w1}}, {{q.q2w2}}, {{q.q2w3}}, {{q.q2w4}}, {{q.q2w5}}</h5>
+                <div class="row d-flex justify-content-between answer_input">
+                    <input type="text" name="a2w1" maxlength="3" required>
+                    <input type="text" name="a2w2" maxlength="3" required>
+                    <input type="text" name="a2w3" maxlength="3" required>
+                    <input type="text" name="a2w4" maxlength="3" required>
+                    <input type="text" name="a2w5" maxlength="3" required>
+                </div>
+            </div>
+            <div class="m-1 each_qus">
+                <h5>3. {{q.q3w1}}, {{q.q3w2}}, {{q.q3w3}}, {{q.q3w4}}, {{q.q3w5}}</h5>
+                <div class="row d-flex justify-content-between answer_input">
+                    <input type="text" name="a3w1" maxlength="3" required>
+                    <input type="text" name="a3w2" maxlength="3" required>
+                    <input type="text" name="a3w3" maxlength="3" required>
+                    <input type="text" name="a3w4" maxlength="3" required>
+                    <input type="text" name="a3w5" maxlength="3" required>
+                </div>
+            </div>
+            <div class="m-1 each_qus">
+                <h5>4. {{q.q4w1}}, {{q.q4w2}}, {{q.q4w3}}, {{q.q4w4}}, {{q.q4w5}}</h5>
+                <div class="row d-flex justify-content-between answer_input">
+                    <input type="text" name="a4w1" maxlength="3" required>
+                    <input type="text" name="a4w2" maxlength="3" required>
+                    <input type="text" name="a4w3" maxlength="3" required>
+                    <input type="text" name="a4w4" maxlength="3" required>
+                    <input type="text" name="a4w5" maxlength="3" required>
+                </div>
+            </div>
+            <div class="m-1 each_qus">
+                <h5>5. {{q.q5w1}}, {{q.q5w2}}, {{q.q5w3}}, {{q.q5w4}}, {{q.q5w5}}</h5>
+                <div class="row d-flex justify-content-between answer_input">
+                    <input type="text" name="a5w1" maxlength="3" required>
+                    <input type="text" name="a5w2" maxlength="3" required>
+                    <input type="text" name="a5w3" maxlength="3" required>
+                    <input type="text" name="a5w4" maxlength="3" required>
+                    <input type="text" name="a5w5" maxlength="3" required>
+                </div>
+            </div>
+            <div class="m-1 each_qus">
+                <h5>6. {{q.q6w1}}, {{q.q6w2}}, {{q.q6w3}}, {{q.q6w4}}, {{q.q6w5}}</h5>
+                <div class="row d-flex justify-content-between answer_input">
+                    <input type="text" name="a6w1" maxlength="3" required>
+                    <input type="text" name="a6w2" maxlength="3" required>
+                    <input type="text" name="a6w3" maxlength="3" required>
+                    <input type="text" name="a6w4" maxlength="3" required>
+                    <input type="text" name="a6w5" maxlength="3" required>
+                </div>
+            </div>
+            <div class="m-1 each_qus">
+                <h5>7. {{q.q7w1}}, {{q.q7w2}}, {{q.q7w3}}, {{q.q7w4}}, {{q.q7w5}}</h5>
+                <div class="row d-flex justify-content-between answer_input">
+                    <input type="text" name="a7w1" maxlength="3" required>
+                    <input type="text" name="a7w2" maxlength="3" required>
+                    <input type="text" name="a7w3" maxlength="3" required>
+                    <input type="text" name="a7w4" maxlength="3" required>
+                    <input type="text" name="a7w5" maxlength="3" required>
+                </div>
+            </div>
+            <div class="m-1 each_qus">
+                <h5>8. {{q.q8w1}}, {{q.q8w2}}, {{q.q8w3}}, {{q.q8w4}}, {{q.q8w5}}</h5>
+                <div class="row d-flex justify-content-between answer_input">
+                    <input type="text" name="a8w1" maxlength="3" required>
+                    <input type="text" name="a8w2" maxlength="3" required>
+                    <input type="text" name="a8w3" maxlength="3" required>
+                    <input type="text" name="a8w4" maxlength="3" required>
+                    <input type="text" name="a8w5" maxlength="3" required>
+                </div>
+            </div>
+            <div class="m-1 each_qus">
+                <h5>9. {{q.q9w1}}, {{q.q9w2}}, {{q.q9w3}}, {{q.q9w4}}, {{q.q9w5}}</h5>
+                <div class="row d-flex justify-content-between answer_input">
+                    <input type="text" name="a9w1" maxlength="3" required>
+                    <input type="text" name="a9w2" maxlength="3" required>
+                    <input type="text" name="a9w3" maxlength="3" required>
+                    <input type="text" name="a9w4" maxlength="3" required>
+                    <input type="text" name="a9w5" maxlength="3" required>
+                </div>
+            </div>
+            <div class="m-1 each_qus">
+                <h5>10. {{q.q10w1}}, {{q.q10w2}}, {{q.q10w3}}, {{q.q10w4}}, {{q.q10w5}}</h5>
+                <div class="row d-flex justify-content-between answer_input">
+                    <input type="text" name="a10w1" maxlength="3" required>
+                    <input type="text" name="a10w2" maxlength="3" required>
+                    <input type="text" name="a10w3" maxlength="3" required>
+                    <input type="text" name="a10w4" maxlength="3" required>
+                    <input type="text" name="a10w5" maxlength="3" required>
+                </div>
+            </div>
+            <input type="hidden" name="qid" value="{{q.id}}">
+            <div style="width: 100%; text-align: center;">
+                <input class="btn btn-success" name='submit' type="submit">
+            </div>
+        </form>
     </div>
     <br>
-<!--    <div style="width: 100%; text-align: center;">-->
-<!--        -->
-<!--    </div>-->
-<!--    <br>-->
-<!--    <script>-->
-<!--        var container = document.getElementById('question_container')-->
-<!--        for(i = 1; i <= 10; i++){-->
-<!--            each_qus = document.createElement('div')-->
-<!--            each_qus.setAttribute('class', 'm-1 each_qus')-->
-<!--            qus_txt = document.createElement('h5')-->
-<!--            qus_txt.innerHTML = `${i}. Question?`-->
-<!--            each_qus.appendChild(qus_txt)-->
-<!--            answer_input = document.createElement('div')-->
-<!--            answer_input.setAttribute('class', 'answer_input row d-flex justify-content-between')-->
-<!--            for(j = 0; j < 10; j++){-->
-<!--                inp = document.createElement('input')-->
-<!--                inp.setAttribute('type', 'number')-->
-<!--                answer_input.appendChild(inp)-->
-<!--                }-->
-<!--            each_qus.appendChild(answer_input)-->
-<!--            container.appendChild(each_qus)-->
-<!--            }-->
-<!--    </script>-->
 {% endblock %}

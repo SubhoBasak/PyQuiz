@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 class Score(models.Model):
     user = models.ForeignKey(verbose_name='User', to=User, on_delete=models.CASCADE)
     score = models.IntegerField(verbose_name='Score', default=0)
-    date_time = models.DateTimeField(verbose_name='Date time', auto_now_add=True)
+    start_date_time = models.DateTimeField(verbose_name='Starting time', null=True)
+    end_date_time = models.DateTimeField(verbose_name='Finishing time', auto_now_add=True)
 
     @property
     def full_name(self):
@@ -18,7 +19,6 @@ class Score(models.Model):
 class Question(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     start_time = models.DateTimeField(auto_now_add=True)
-    end_time = models.DateTimeField(null=True)
     q1w1 = models.CharField(max_length=3)
     q1w2 = models.CharField(max_length=3)
     q1w3 = models.CharField(max_length=3)

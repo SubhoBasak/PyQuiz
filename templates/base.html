@@ -21,7 +21,9 @@
     {% endblock %}
     <footer style="text-align: center; background: #ffffffe6;">
       <br>
-      <p>{{user.first_name}} {{user.last_name}}</p><a href="{% url 'logout' %}">Logout</a>
+      <p>{{user.first_name}} {{user.last_name}}</p>
+      <a href="{% url 'score' %}">Last quiz score</a><br>
+      <a href="{% url 'logout' %}">Logout</a>
       <hr>
       <br>
       <p class="main_footer">

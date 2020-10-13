@@ -78,8 +78,30 @@ def register_view(request):
 @login_required
 def index_view(request):
     if 'submit' in request.POST:
-        result = Score(user=User, score=1)
+        answer_set = [[request.POST['a1w1'], request.POST['a1w2'], request.POST['a1w3'], request.POST['a1w4'], request.POST['a1w5']],
+                      [request.POST['a2w1'], request.POST['a2w2'], request.POST['a2w3'], request.POST['a2w4'], request.POST['a2w5']],
+                      [request.POST['a3w1'], request.POST['a3w2'], request.POST['a3w3'], request.POST['a3w4'], request.POST['a3w5']],
+                      [request.POST['a4w1'], request.POST['a4w2'], request.POST['a4w3'], request.POST['a4w4'], request.POST['a4w5']],
+                      [request.POST['a5w1'], request.POST['a5w2'], request.POST['a5w3'], request.POST['a5w4'], request.POST['a5w5']],
+                      [request.POST['a6w1'], request.POST['a6w2'], request.POST['a6w3'], request.POST['a6w4'], request.POST['a6w5']],
+                      [request.POST['a7w1'], request.POST['a7w2'], request.POST['a7w3'], request.POST['a7w4'], request.POST['a7w5']],
+                      [request.POST['a8w1'], request.POST['a8w2'], request.POST['a8w3'], request.POST['a8w4'], request.POST['a8w5']],
+                      [request.POST['a9w1'], request.POST['a9w2'], request.POST['a9w3'], request.POST['a9w4'], request.POST['a9w5']],
+                      [request.POST['a10w1'], request.POST['a10w2'], request.POST['a10w3'], request.POST['a10w4'], request.POST['a10w5']],
+                      ]
+        question = Question.objects.get(id=request.POST['qid'])
+        actual_answer = question.get_answer()
+        score = 0
+        for i in range(10):
+            marks = 1
+            for j in range(5):
+                if actual_answer[i][j] != answer_set[i][j]:
+                    marks = 0
+                    break
+            score += marks
+        result = Score(user=request.user, score=score, start_date_time=question.start_time)
         result.save()
+        question.delete()
         return redirect(reverse('score'))
     question = it.combinations_with_replacement(string.ascii_letters, 3)
     question = list(question)
@@ -160,4 +182,5 @@ def index_view(request):
 
 @login_required
 def score_view(request):
-    return render(request, 'score.html')
+    scores = Score.objects.filter(user=request.user)
+    return render(request, 'score.html', {'correct': scores[0].score, 'incorrect': 10-scores[0].score})
