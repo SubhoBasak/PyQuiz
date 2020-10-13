@@ -102,6 +102,9 @@ def index_view(request):
         result = Score(user=request.user, score=score, start_date_time=question.start_time)
         result.save()
         question.delete()
+        send_mail('Quiz score',
+                  'Number of questions : 10\nCorrect answered : {}\nWrong answered : {}\nTotal score : {}'.format(score, 10-score, score),
+                  'subhobasak22@gmail.com', [request.user.email])
         return redirect(reverse('score'))
     question = it.combinations_with_replacement(string.ascii_letters, 3)
     question = list(question)
@@ -182,5 +185,5 @@ def index_view(request):
 
 @login_required
 def score_view(request):
-    scores = Score.objects.filter(user=request.user)
+    scores = Score.objects.filter(user=request.user)[::-1]
     return render(request, 'score.html', {'correct': scores[0].score, 'incorrect': 10-scores[0].score})
