@@ -14,13 +14,14 @@
   </head>
   <body style="background: url('{% static 'images/bg_img.jpg' %}')">
     <div class="container bg-primary p-1 shadow rounded">
-      <p class="main_header">Py Quiz</p>
+      <p class="main_header"><a href="{% url 'index' %}" style="text-decoration: none; color: #fff;">Py Quiz</a></p>
     </div>
     <br><br>
     {% block content %}
     {% endblock %}
-    <footer style="background: #ffffffe6;">
+    <footer style="text-align: center; background: #ffffffe6;">
       <br>
+      <p>{{user.first_name}} {{user.last_name}}</p><a href="{% url 'logout' %}">Logout</a>
       <hr>
       <br>
       <p class="main_footer">
