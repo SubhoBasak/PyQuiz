@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.views import login_required
 from django.contrib.auth import login, logout
 from django.core.mail import send_mail
-from .models import Score, Question
+from django.utils import timezone
+from .models import Score, Question, QuestionSet, Exam
 import itertools as it
 import random
 import string
@@ -77,113 +78,69 @@ def register_view(request):
 
 @login_required
 def index_view(request):
-    if 'submit' in request.POST:
-        answer_set = [[request.POST['a1w1'], request.POST['a1w2'], request.POST['a1w3'], request.POST['a1w4'], request.POST['a1w5']],
-                      [request.POST['a2w1'], request.POST['a2w2'], request.POST['a2w3'], request.POST['a2w4'], request.POST['a2w5']],
-                      [request.POST['a3w1'], request.POST['a3w2'], request.POST['a3w3'], request.POST['a3w4'], request.POST['a3w5']],
-                      [request.POST['a4w1'], request.POST['a4w2'], request.POST['a4w3'], request.POST['a4w4'], request.POST['a4w5']],
-                      [request.POST['a5w1'], request.POST['a5w2'], request.POST['a5w3'], request.POST['a5w4'], request.POST['a5w5']],
-                      [request.POST['a6w1'], request.POST['a6w2'], request.POST['a6w3'], request.POST['a6w4'], request.POST['a6w5']],
-                      [request.POST['a7w1'], request.POST['a7w2'], request.POST['a7w3'], request.POST['a7w4'], request.POST['a7w5']],
-                      [request.POST['a8w1'], request.POST['a8w2'], request.POST['a8w3'], request.POST['a8w4'], request.POST['a8w5']],
-                      [request.POST['a9w1'], request.POST['a9w2'], request.POST['a9w3'], request.POST['a9w4'], request.POST['a9w5']],
-                      [request.POST['a10w1'], request.POST['a10w2'], request.POST['a10w3'], request.POST['a10w4'], request.POST['a10w5']],
-                      ]
-        question = Question.objects.get(id=request.POST['qid'])
-        actual_answer = question.get_answer()
-        score = 0
-        for i in range(10):
-            marks = 1
-            for j in range(5):
-                if actual_answer[i][j] != answer_set[i][j]:
-                    marks = 0
-                    break
-            score += marks
-        result = Score(user=request.user, score=score, start_date_time=question.start_time)
-        result.save()
-        question.delete()
-        send_mail('Quiz score',
-                  'Number of questions : 10\nCorrect answered : {}\nWrong answered : {}\nTotal score : {}'.format(score, 10-score, score),
-                  'subhobasak22@gmail.com', [request.user.email])
-        return redirect(reverse('score'))
-    question = it.combinations_with_replacement(string.ascii_letters, 3)
-    question = list(question)
-    ques_model = Question(user=request.user)
-    ques = random.sample(question, 5)
-    ques = [''.join(i) for i in ques]
-    ques_model.q1w1 = ques[0]
-    ques_model.q1w2 = ques[1]
-    ques_model.q1w3 = ques[2]
-    ques_model.q1w4 = ques[3]
-    ques_model.q1w5 = ques[4]
-    ques = random.sample(question, 5)
-    ques = [''.join(i) for i in ques]
-    ques_model.q2w1 = ques[0]
-    ques_model.q2w2 = ques[1]
-    ques_model.q2w3 = ques[2]
-    ques_model.q2w4 = ques[3]
-    ques_model.q2w5 = ques[4]
-    ques = random.sample(question, 5)
-    ques = [''.join(i) for i in ques]
-    ques_model.q3w1 = ques[0]
-    ques_model.q3w2 = ques[1]
-    ques_model.q3w3 = ques[2]
-    ques_model.q3w4 = ques[3]
-    ques_model.q3w5 = ques[4]
-    ques = random.sample(question, 5)
-    ques = [''.join(i) for i in ques]
-    ques_model.q4w1 = ques[0]
-    ques_model.q4w2 = ques[1]
-    ques_model.q4w3 = ques[2]
-    ques_model.q4w4 = ques[3]
-    ques_model.q4w5 = ques[4]
-    ques = random.sample(question, 5)
-    ques = [''.join(i) for i in ques]
-    ques_model.q5w1 = ques[0]
-    ques_model.q5w2 = ques[1]
-    ques_model.q5w3 = ques[2]
-    ques_model.q5w4 = ques[3]
-    ques_model.q5w5 = ques[4]
-    ques = random.sample(question, 5)
-    ques = [''.join(i) for i in ques]
-    ques_model.q6w1 = ques[0]
-    ques_model.q6w2 = ques[1]
-    ques_model.q6w3 = ques[2]
-    ques_model.q6w4 = ques[3]
-    ques_model.q6w5 = ques[4]
-    ques = random.sample(question, 5)
-    ques = [''.join(i) for i in ques]
-    ques_model.q7w1 = ques[0]
-    ques_model.q7w2 = ques[1]
-    ques_model.q7w3 = ques[2]
-    ques_model.q7w4 = ques[3]
-    ques_model.q7w5 = ques[4]
-    ques = random.sample(question, 5)
-    ques = [''.join(i) for i in ques]
-    ques_model.q8w1 = ques[0]
-    ques_model.q8w2 = ques[1]
-    ques_model.q8w3 = ques[2]
-    ques_model.q8w4 = ques[3]
-    ques_model.q8w5 = ques[4]
-    ques = random.sample(question, 5)
-    ques = [''.join(i) for i in ques]
-    ques_model.q9w1 = ques[0]
-    ques_model.q9w2 = ques[1]
-    ques_model.q9w3 = ques[2]
-    ques_model.q9w4 = ques[3]
-    ques_model.q9w5 = ques[4]
-    ques = random.sample(question, 5)
-    ques = [''.join(i) for i in ques]
-    ques_model.q10w1 = ques[0]
-    ques_model.q10w2 = ques[1]
-    ques_model.q10w3 = ques[2]
-    ques_model.q10w4 = ques[3]
-    ques_model.q10w5 = ques[4]
-    ques_model.save()
-    return render(request, 'index.html', {'q': ques_model})
+    exams = Exam.objects.all()
+    scores = []
+    for e in exams:
+        try:
+            scores.append(Score.objects.get(user=request.user, exam=e))
+        except Score.DoesNotExist:
+            scores.append(-1)
+    exam_score_zip = zip(exams, scores)
+    return render(request, 'index.html', {'es_zip': exam_score_zip})
 
 
 @login_required
-def score_view(request):
-    scores = Score.objects.filter(user=request.user)[::-1]
-    return render(request, 'score.html', {'correct': scores[0].score, 'incorrect': 10-scores[0].score})
+def quiz_view(request, eid):
+    try:
+        exam = Exam.objects.get(id=eid)
+    except Exam.DoesNotExist:
+        return redirect(reverse('index'))
+    if 'submit' in request.POST:
+        question_set = QuestionSet.objects.filter(user=request.user, exam=exam)
+        score = 0
+        for q in question_set:
+            q.confidence = request.POST['conf_'+str(q.question.id)]
+            q.answered = request.POST[str(q.question.id)][0]
+            q.save()
+            if request.POST[str(q.question.id)][0] == q.question.answer:
+                score += 1
+        # result = Score(user=request.user, score=score, exam=exam)
+        # result.save()
+        try:
+            result = Score.objects.get(user=request.user, exam=exam)
+            result.end = timezone.now()
+            result.score = score
+            result.save()
+        except Score.DoesNotExist:
+            return redirect(reverse('index'))
+        # for q in question_set:
+        #     q.delete()
+        return redirect('/score/'+str(exam.id)+'/')
+
+    question_set = QuestionSet.objects.filter(user=request.user, exam=exam)
+    if len(question_set) == 0:
+        score = Score(user=request.user, exam=exam)
+        score.save()
+        questions = Question.objects.filter(exam=exam)
+        try:
+            questions = random.sample(list(questions), exam.questions)
+        except Exception as e:
+            return redirect(reverse('index'))
+        question_set = []
+        for qus in questions:
+            q = QuestionSet(user=request.user, question=qus, exam=exam, score=score)
+            q.save()
+            question_set.append(q)
+    return render(request, 'quiz.html', {'q': question_set})
+
+
+@login_required
+def score_view(request, eid):
+    try:
+        exam = Exam.objects.get(id=eid)
+        scores = Score.objects.filter(user=request.user)[::-1]
+        return render(request, 'score.html',
+                      {'total_questions': exam.questions, 'correct': scores[0].score,
+                        'incorrect': exam.questions-scores[0].score})
+    except Exception as e:
+        return redirect(reverse('index'))

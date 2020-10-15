@@ -23,7 +23,7 @@
 			<td><p><span>Name :</span> {{user.first_name}} {{user.last_name}}</p></td>
 		</tr>
 		<tr>
-			<td><p><span>Total Questions :</span> 10</p></td>
+			<td><p><span>Total Questions :</span> {{total_questions}}</p></td>
 		</tr>
 		<tr>
 			<td><p><span>Correct answers :</span> {{correct}}</p></td>
@@ -32,7 +32,7 @@
 			<td><p><span>Wrong Answers :</span> {{incorrect}}</p></td>
 		</tr>
 		<tr>
-			<td><p><span>Total Score :</span> {{correct}}/10</p></td>
+			<td><p><span>Total Score :</span> {{correct}}/{{total_questions}}</p></td>
 		</tr>
 	</table>
 {% endblock %}

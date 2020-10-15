@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Py Quiz</title>
+{% endblock %}
+
+{% block content %}
+    <div id="question_container" class="container border border-success rounded
+            col-lg-7 col-md-10 col-sm-12 p-5">
+        <form method="POST">
+            {% csrf_token %}
+            {% for qus in q %}
+                <div class="m-1 each_qus">
+                    {% if qus.question.image %}
+                        <img src="{{qus.question.image.url}}" />
+                    {% endif %}
+                    <h5>{{qus.question.question}}</h5>
+                    <div class="answer_input">
+                        <input type="radio" name="{{qus.question.id}}" required value="A">{{qus.question.optionA}}<br>
+                        <input type="radio" name="{{qus.question.id}}" required value="B">{{qus.question.optionB}}<br>
+                        <input type="radio" name="{{qus.question.id}}" required value="C">{{qus.question.optionC}}<br>
+                        <input type="radio" name="{{qus.question.id}}" required value="D">{{qus.question.optionD}}<br>
+                    </div>
+                    <label for="conf_id" style="font-weight: bold; color: limegreen; margin-top: 5px;">Confidence : </label>
+                    <select name="conf_{{qus.question.id}}" id="conf_id">
+                        <option value="0.1">0.1</option>
+                        <option value="0.2">0.2</option>
+                        <option value="0.3">0.3</option>
+                        <option value="0.4">0.4</option>
+                        <option value="0.5">0.5</option>
+                        <option value="0.6">0.6</option>
+                        <option value="0.7">0.7</option>
+                        <option value="0.8">0.8</option>
+                        <option value="0.9">0.9</option>
+                        <option value="1.0">1.0</option>
+                    </select>
+                </div>
+            {% endfor %}
+            <input type="hidden" name="qid" value="{{q.id}}">
+            <div style="width: 100%; text-align: center;">
+                <input class="btn btn-success" name='submit' type="submit">
+            </div>
+        </form>
+    </div>
+    <br>
+{% endblock %}
